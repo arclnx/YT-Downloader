@@ -15,4 +15,7 @@ def printInfo(yt):
     
     print(*streamDict, sep="\n\n")
     
+def prettyPrintDict(dict, columns):
+    pass
+    
 printInfo(YouTube("https://www.youtube.com/watch?v=2lAe1cqCOXo"))
