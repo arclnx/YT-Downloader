@@ -15,7 +15,12 @@ def printInfo(yt):
     
     print(*streamDict, sep="\n\n")
     
-def prettyPrintDict(dict, columns):
+def prettyPrintDict(dict, columnsToPrint):
+    
+    # Find the maximum width of the value in the column or the column header itself
+    max([len(dict.get(column,"")) for column in columnsToPrint]
+        + column for column in columnsToPrint)
+    
     pass
     
 printInfo(YouTube("https://www.youtube.com/watch?v=2lAe1cqCOXo"))
