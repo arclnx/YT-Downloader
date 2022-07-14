@@ -18,7 +18,8 @@ def printInfo(yt):
 def prettyPrintDict(dict, columnsToPrint):
     
     # Find the maximum width of the value in the column or the column header itself
-    max([len(dict.get(column,"")) for column in columnsToPrint]
+    max(
+        [len(dict.get(column,"")) for column in columnsToPrint]
         + column for column in columnsToPrint)
     
     pass
