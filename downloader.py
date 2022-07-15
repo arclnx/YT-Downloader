@@ -1,3 +1,4 @@
+from pyparsing import col
 from pytube import YouTube
 
 def printInfo(yt):
@@ -17,11 +18,26 @@ def printInfo(yt):
     
 def prettyPrintDictList(dictList, columnsToPrint):
     
-    # Find the maximum width of the value in the column or the column header itself
-    columnWidths = [max([len(dictList[row].get(column,"")) for row in range(len(dictList))]) for column in columnsToPrint]
-
-    return columnWidths
     
+    # Find the maximum width of the value in the column or the column header itself
+    columnWidths = {column:max([len(dictList[row].get(column,"")) for row in range(len(dictList))]+[len(column)]) for column in columnsToPrint}
+    columnWidths = columnWidths
+    print(columnWidths)
+    
+    # Print the header of the table
+    
+    topHeader = "┌" + "┬".join(["─"*(columnWidths[column]+2) for column in columnsToPrint]) + "┐"
+    midHeader = "│" + "│".join([column.center(columnWidths[column]+2) for column in columnsToPrint]) + "│"
+    lowHeader = "├" + "┼".join(["─"*(columnWidths[column]+2) for column in columnsToPrint]) + "┤"
+
+    print(topHeader)
+    print(midHeader)
+    print(lowHeader)
+
+
+
+
+
 print(*printInfo(YouTube("https://www.youtube.com/watch?v=2lAe1cqCOXo")), sep="\n\n")
 print("\n\n\n\n\n")
-print(prettyPrintDictList(printInfo(YouTube("https://www.youtube.com/watch?v=2lAe1cqCOXo")), ["itag","type"]))
+prettyPrintDictList(printInfo(YouTube("https://www.youtube.com/watch?v=2lAe1cqCOXo")), ["itag","type","res"])
