@@ -9,7 +9,6 @@ def getInfo(url):
     print("+-----------------------------------+")
     print("| " + title)
     print("+-----------------------------------+")
-    print("Streams:")
     
     # Format stream into dictionary
     streamDictList = [{streamData[0]:streamData[1] for streamData in [
@@ -17,12 +16,19 @@ def getInfo(url):
     
     return streamDictList
     
-def prettyPrintDictList(dictList, columnsToPrint):
+def prettyPrintStreams(url, columnsToPrint):
+    
+    # Get YouTube video information
+    yt = YouTube(url)
+    title=yt.title
+    streamList = yt.streams
+
+    dictList = [{streamData[0]:streamData[1] for streamData in [
+        pair.split("=") for pair in str(stream)[1:-1].replace('"','').split(" ")[1:]]} for stream in streamList]
     
     
     # Find the maximum width of the value in the column or the column header itself
     columnWidths = {column:max([len(dictList[row].get(column,"")) for row in range(len(dictList))]+[len(column)]) for column in columnsToPrint}
-    columnWidths = columnWidths
     
     # Print the header of the table
     topHeader = "┌" + "┬".join(["─"*(columnWidths[column]+2) for column in columnsToPrint]) + "┐"
@@ -42,8 +48,4 @@ def prettyPrintDictList(dictList, columnsToPrint):
     print(bottom)
 
 
-
-
-print(*getInfo(YouTube("https://www.youtube.com/watch?v=2lAe1cqCOXo")), sep="\n\n")
-#print("\n\n\n\n\n")
-prettyPrintDictList(getInfo("https://www.youtube.com/watch?v=2lAe1cqCOXo"), ["itag","type","res","fps","abr","vcodec","acodec"])
+prettyPrintStreams("https://www.youtube.com/watch?v=2lAe1cqCOXo", ["itag","type","res","fps","abr","vcodec","acodec"])
