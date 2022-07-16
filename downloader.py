@@ -25,14 +25,17 @@ def prettyPrintDictList(dictList, columnsToPrint):
     print(columnWidths)
     
     # Print the header of the table
-    
     topHeader = "┌" + "┬".join(["─"*(columnWidths[column]+2) for column in columnsToPrint]) + "┐"
     midHeader = "│" + "│".join([column.center(columnWidths[column]+2) for column in columnsToPrint]) + "│"
-    lowHeader = "├" + "┼".join(["─"*(columnWidths[column]+2) for column in columnsToPrint]) + "┤"
-
     print(topHeader)
     print(midHeader)
-    print(lowHeader)
+    
+    # Print the data of the table
+    for row in dictList:
+        topDivider = "├" + "┼".join(["─"*(columnWidths[column]+2) for column in columnsToPrint]) + "┤"
+        data = "│" + "│".join(" "+[row[column].ljust(columnWidths[column]+1) for column in columnsToPrint]) + "│"
+        print(topDivider)
+        print(data)
 
 
 
