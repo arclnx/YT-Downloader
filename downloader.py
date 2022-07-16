@@ -33,7 +33,7 @@ def prettyPrintDictList(dictList, columnsToPrint):
     # Print the data of the table
     for row in dictList:
         topDivider = "├" + "┼".join(["─"*(columnWidths[column]+2) for column in columnsToPrint]) + "┤"
-        data = "│" + "│".join(" "+[row[column].ljust(columnWidths[column]+1) for column in columnsToPrint]) + "│"
+        data = "│" + "│".join([" "+row.get(column,"").ljust(columnWidths[column]+1) for column in columnsToPrint])
         print(topDivider)
         print(data)
 
@@ -41,6 +41,6 @@ def prettyPrintDictList(dictList, columnsToPrint):
 
 
 
-print(*printInfo(YouTube("https://www.youtube.com/watch?v=2lAe1cqCOXo")), sep="\n\n")
-print("\n\n\n\n\n")
+#print(*printInfo(YouTube("https://www.youtube.com/watch?v=2lAe1cqCOXo")), sep="\n\n")
+#print("\n\n\n\n\n")
 prettyPrintDictList(printInfo(YouTube("https://www.youtube.com/watch?v=2lAe1cqCOXo")), ["itag","type","res"])
