@@ -34,7 +34,10 @@ def prettyPrintStreams(url, columnsToPrint):
     # Print the video details
     title = yt.title
     author = yt.author
-    length = str(yt.seconds//3600).zfill(2) + ":" + str(yt.seconds%3600//60).zfill(2) + ":" + str(yt.seconds%3600%60)
+    length = str(yt.length//3600).zfill(2) + ":" + str(yt.length%3600//60).zfill(2) + ":" + str(yt.length%3600%60) # Format time
+    print(title)
+    print(author)
+    print(length)
     
     # Print the header of the table
     topHeader = "┌" + "┬".join(["─"*(columnWidths[column]+2) for column in columnsToPrint]) + "┐"
