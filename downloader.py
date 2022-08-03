@@ -1,21 +1,7 @@
 from pyparsing import col
 from pytube import YouTube
 
-def getInfo(url):
-    yt = YouTube(url)
-    title=yt.title
-    streamList = yt.streams
-    
-    print("+-----------------------------------+")
-    print("| " + title)
-    print("+-----------------------------------+")
-    
-    # Format stream into dictionary
-    streamDictList = [{streamData[0]:streamData[1] for streamData in [
-        pair.split("=") for pair in str(stream)[1:-1].replace('"','').split(" ")[1:]]} for stream in streamList]
-    
-    return streamDictList
-    
+
 def prettyPrintStreams(url, columnsToPrint):
     
     # Get YouTube video information
